@@ -21,9 +21,11 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		void splitRects(FractalRect r);
+		void splitRects(FractalRect& r);
 		void splitTriangles(FractalTriangle& t);
 		void drawTriangles(FractalTriangle& t);
+		void drawRects(FractalRect& r);
+
 
 		void calcIntegral(ofImage bitmap);
 		
@@ -33,6 +35,7 @@ class testApp : public ofBaseApp{
 
 		unsigned long* integral;
 		FractalTriangle* triangle;
+		FractalRect*     rectangle;
 		unsigned int depth;
 
 		bool doSave;

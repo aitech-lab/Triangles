@@ -3,9 +3,9 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	
-	image.loadImage("002.jpg");
+	image.loadImage("003.jpg");
 	
-	depth  = 7;
+	depth  = 12;
 	doSave = false;
 	timer  = 0;
 
@@ -45,14 +45,15 @@ void testApp::setup(){
 	float x2 = cx+r*sin(a+2*3.1415926*2/3); float y2 = cx+r*cos(a+2*3.1415926*2/3);
 	float x3 = cx+r*sin(a+3*3.1415926*2/3); float y3 = cx+r*cos(a+3*3.1415926*2/3);
 	triangle = new FractalTriangle(x1, y1, x2, y2, x3, y3);
-	splitTriangles(*triangle);
+	rectangle = new FractalRect(0, 0, w-1, h-1);
+	//splitTriangles(*triangle);
+	splitRects(*rectangle);
 
 	ofBackground(0xFFFFFF);
 	ofSetBackgroundAuto(false);
 	ofEnableAlphaBlending();
-	ofSetCircleResolution(6);
+	ofSetCircleResolution(4);
 
-	
 }
 
 void testApp::splitTriangles(FractalTriangle& t) {
@@ -107,18 +108,18 @@ bool testApp::getIntegralFromTriangle(FractalTriangle& t) {
 	return false;
 }
 
-void testApp::splitRects(FractalRect r) {
+void testApp::splitRects(FractalRect& r) {
 	unsigned int w = image.width ;
 	unsigned int h = image.height;
-	if(r.l < 11) {
+
+	r.r = (integral[((int)r.x+(int)r.y*w)*3+0] + integral[((int)(r.x+r.w)+(int)(r.y+r.h)*w)*3+0] - integral[((int)(r.x+r.w)+(int)r.y*w)*3+0] - integral[((int)r.x+(int)(r.y+r.h)*w)*3+0])/(r.w*r.h);
+	r.g = (integral[((int)r.x+(int)r.y*w)*3+1] + integral[((int)(r.x+r.w)+(int)(r.y+r.h)*w)*3+1] - integral[((int)(r.x+r.w)+(int)r.y*w)*3+1] - integral[((int)r.x+(int)(r.y+r.h)*w)*3+1])/(r.w*r.h);
+	r.b = (integral[((int)r.x+(int)r.y*w)*3+2] + integral[((int)(r.x+r.w)+(int)(r.y+r.h)*w)*3+2] - integral[((int)(r.x+r.w)+(int)r.y*w)*3+2] - integral[((int)r.x+(int)(r.y+r.h)*w)*3+2])/(r.w*r.h);
+
+	if(r.l < depth) {
 		r.split();
 		splitRects(*r.c1);
 		splitRects(*r.c2);
-	}  else {
-		r.r = (integral[((int)r.x+(int)r.y*w)*3+0] + integral[((int)(r.x+r.w)+(int)(r.y+r.h)*w)*3+0] - integral[((int)(r.x+r.w)+(int)r.y*w)*3+0] - integral[((int)r.x+(int)(r.y+r.h)*w)*3+0])/(r.w*r.h);
-		r.g = (integral[((int)r.x+(int)r.y*w)*3+1] + integral[((int)(r.x+r.w)+(int)(r.y+r.h)*w)*3+1] - integral[((int)(r.x+r.w)+(int)r.y*w)*3+1] - integral[((int)r.x+(int)(r.y+r.h)*w)*3+1])/(r.w*r.h);
-		r.b = (integral[((int)r.x+(int)r.y*w)*3+2] + integral[((int)(r.x+r.w)+(int)(r.y+r.h)*w)*3+2] - integral[((int)(r.x+r.w)+(int)r.y*w)*3+2] - integral[((int)r.x+(int)(r.y+r.h)*w)*3+2])/(r.w*r.h);
-		rects.push_back(r);
 	}
 }
 
@@ -187,24 +188,33 @@ void testApp::drawTriangles(FractalTriangle& t) {
 	}
 }
 
+void testApp::drawRects(FractalRect& r) {
+	float cx = r.x+r.w/2;
+	float cy = r.y+r.h/2;
+	float noize = ofNoise(cx/1200-timer, cy/1200-timer/10.0);
+	int st = 6;
+	if (r.l > st && r.l >= st+noize*(depth-st) || r.l >= depth) {
+		ofFill();
+		ofSetColor((int)r.r, (int)r.g, (int)r.b, 255);
+		ofRect(r.x,r.y,r.w,r.h);
+		// ofSetColor(0xFF, 0xFF, 0xFF, 32);
+		// ofCircle(cx, cy, noize*10);
+
+	} else {
+		drawRects(*r.c1);
+		drawRects(*r.c2);
+	}
+}
 //--------------------------------------------------------------
 void testApp::draw(){
 	unsigned int w = image.width ;
 	unsigned int h = image.height;
 	unsigned static int counter=0;
-
-	int k = 100;
-	// image.draw(0,0, w/2.0, h/2.0);
-
-	// for (int i = 0; i<rects.size(); i++) {
-	// 	FractalRect r = rects[i];
-	// 	ofSetColor(r.r, r.g, r.b);
-	//	ofRect(r.x, r.y, r.w-1, r.h-1);
-	// }
-
-	if(doSave) ofBeginSaveScreenAsPDF("graphics-"+ofToString(counter++)+".pdf");
-	drawTriangles(*triangle);
-	if(doSave) { ofEndSaveScreenAsPDF(); doSave = false; }
+	
+	//if(doSave) ofBeginSaveScreenAsPDF("graphics-"+ofToString(counter++)+".pdf");
+	//drawTriangles(*triangle);
+	drawRects(*rectangle);
+	//if(doSave) { ofEndSaveScreenAsPDF(); doSave = false; }
 
 }
 
