@@ -3,8 +3,9 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 	
-	image.loadImage("003.jpg");
-	
+	image.loadImage("002.jpg");
+	font.loadFont("impact.ttf", 16, true, true, true);
+
 	depth  = 12;
 	doSave = false;
 	timer  = 0;
@@ -192,11 +193,12 @@ void testApp::drawRects(FractalRect& r) {
 	float cx = r.x+r.w/2;
 	float cy = r.y+r.h/2;
 	float noize = ofNoise(cx/1200-timer, cy/1200-timer/10.0);
-	int st = 6;
+	int st = 1;
 	if (r.l > st && r.l >= st+noize*(depth-st) || r.l >= depth) {
 		ofFill();
-		ofSetColor((int)r.r, (int)r.g, (int)r.b, 255);
+		ofSetColor((int)r.r, (int)r.g, (int)r.b, 32);
 		ofRect(r.x,r.y,r.w,r.h);
+		//font.drawString("a", r.x, r.y);
 		// ofSetColor(0xFF, 0xFF, 0xFF, 32);
 		// ofCircle(cx, cy, noize*10);
 

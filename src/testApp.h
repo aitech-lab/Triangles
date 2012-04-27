@@ -26,7 +26,6 @@ class testApp : public ofBaseApp{
 		void drawTriangles(FractalTriangle& t);
 		void drawRects(FractalRect& r);
 
-
 		void calcIntegral(ofImage bitmap);
 		
 		ofImage image;
@@ -37,6 +36,8 @@ class testApp : public ofBaseApp{
 		FractalTriangle* triangle;
 		FractalRect*     rectangle;
 		unsigned int depth;
+
+		ofTrueTypeFont font;
 
 		bool doSave;
 		float timer;
