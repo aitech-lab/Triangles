@@ -4,8 +4,9 @@
 void testApp::setup(){
 	
 	image.loadImage("002.jpg");
+	button.loadImage("button.png");
 	
-	depth  = 7;
+	depth  = 8;
 	doSave = false;
 	timer  = 0;
 
@@ -48,9 +49,9 @@ void testApp::setup(){
 	splitTriangles(*triangle);
 
 	ofBackground(0xFFFFFF);
-	ofSetBackgroundAuto(false);
+	//ofSetBackgroundAuto(false);
 	ofEnableAlphaBlending();
-	ofSetCircleResolution(6);
+	ofSetCircleResolution(36);
 
 	
 }
@@ -142,7 +143,7 @@ void testApp::drawTriangles(FractalTriangle& t) {
 
 	// if (t.l>2 && t.l>(1-d)*depth || t.l >= depth) {
 	// if (t.l>2 && ofRandom(100)>75 || t.l >= depth) {
-	if (t.l > 2 && t.l >= 2+noize*(depth-2) || t.l >= depth) {
+	if (t.l > 1 && t.l >= 1+noize*(depth-1) || t.l >= depth) {
 		
 		if (t.hasIntegral) {
 			ofFill();
@@ -152,31 +153,8 @@ void testApp::drawTriangles(FractalTriangle& t) {
 			//else 
 			//	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 
-			if(doSave) {
-				ofSetColor(t.r, t.g, t.b, 400);
-				ofTriangle(t.x1, t.y1, t.x2, t. y2, t.x3, t.y3);
-			} else {
-				glBegin(GL_TRIANGLES);
-				glColor4f(t.r1/255.0, t.g1/255.0, t.b1/255.0, 0.1); glVertex2d(t.x1, t.y1);
-				glColor4f(t.r2/255.0, t.g2/255.0, t.b2/255.0, 0.1); glVertex2d(t.x2, t.y2);
-				glColor4f(t.r3/255.0, t.g3/255.0, t.b3/255.0, 0.1); glVertex2d(t.x3, t.y3);
-				glEnd();
-			}		
-
-			if(t.l<depth-1) { 
-			    //ofSetColor(0xff, 0xff, 0xff, 16);
-			 	//ofSetColor(t.r, t.g, t.b, 32);
-			 	//ofCircle(cx, cy, r);
-			 	ofSetColor(t.r, t.g, t.b, 16);
-			 	ofTriangle(t.x12, t.y12, t.x23, t.y23, t.x31, t.y31);
-			 }
-
-			
-			if (t.l<depth-2) {
-				ofNoFill();
-				ofSetColor(0xFF, 0xFF, 0xFF, 32);
-				ofCircle(cx, cy, r*2);
-			}
+			ofSetColor(t.r, t.g, t.b);
+			button.draw(cx-r, cy-r, r*2, r*2);
 		}
 
 	} else {

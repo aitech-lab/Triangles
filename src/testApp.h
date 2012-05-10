@@ -38,6 +38,8 @@ class testApp : public ofBaseApp{
 		bool doSave;
 		float timer;
 
+		ofImage button;
+
 
 private:
 		bool getIntegralFromTriangle(FractalTriangle& t);
