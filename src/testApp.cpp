@@ -8,16 +8,11 @@ void testApp::setup(){
 
 	kinect.Nui_Init();
 	
-	depth  = 7;
+	depth  = 5;
 	doSave = false;
 	timer  = 0;
 	integralColor = (unsigned long*) malloc(sizeof(unsigned long) * W * H * 3 * 4);
 	integralDepth = (unsigned long*) malloc(sizeof(unsigned long) * W * H );
-
-	
-
-	//splitRects(FractalRect(0, 0, image.width-1, image.height-1));
-
 
 	ofBackground(0xFFFFFF);
 	ofSetBackgroundAuto(false);
@@ -43,7 +38,7 @@ void testApp::calcIntegral(){
 								 + pixels       [(x    +  y   *W)*3];
 
 	// integral color (per chanel)
-	unsigned char* pixels = kinect.colorBuffer;
+	pixels = kinect.colorBuffer;
 	integralColor[0] = pixels[0];
 	
 	for(unsigned int x=1; x<W*2; x++) {
@@ -68,7 +63,6 @@ void testApp::calcIntegral(){
 }
 
 void testApp::splitTriangles(FractalTriangle& t) {
-	
 	if(t.l < depth) {
 		t.split();
 		getIntegralFromTriangle(*t.t1);
@@ -115,20 +109,6 @@ bool testApp::getIntegralFromTriangle(FractalTriangle& t) {
 	return false;
 }
 
-void testApp::splitRects(FractalRect r) {
-
-	if(r.l < 11) {
-		r.split();
-		splitRects(*r.c1);
-		splitRects(*r.c2);
-	}  else {
-		r.r = (integral[((int)r.x+(int)r.y*W)*3+0] + integral[((int)(r.x+r.w)+(int)(r.y+r.h)*W)*3+0] - integral[((int)(r.x+r.w)+(int)r.y*W)*3+0] - integral[((int)r.x+(int)(r.y+r.h)*W)*3+0])/(r.w*r.h);
-		r.g = (integral[((int)r.x+(int)r.y*W)*3+1] + integral[((int)(r.x+r.w)+(int)(r.y+r.h)*W)*3+1] - integral[((int)(r.x+r.w)+(int)r.y*W)*3+1] - integral[((int)r.x+(int)(r.y+r.h)*W)*3+1])/(r.w*r.h);
-		r.b = (integral[((int)r.x+(int)r.y*W)*3+2] + integral[((int)(r.x+r.w)+(int)(r.y+r.h)*W)*3+2] - integral[((int)(r.x+r.w)+(int)r.y*W)*3+2] - integral[((int)r.x+(int)(r.y+r.h)*W)*3+2])/(r.w*r.h);
-		rects.push_back(r);
-	}
-}
-
 void testApp::exit() {
 	free(integralColor);
 	free(integralDepth);
@@ -156,11 +136,9 @@ void testApp::update(){
 	float x2 = cx+r*sin(a+2*3.1415926*2/3); float y2 = cx+r*cos(a+2*3.1415926*2/3);
 	float x3 = cx+r*sin(a+3*3.1415926*2/3); float y3 = cx+r*cos(a+3*3.1415926*2/3);
 	
-	triangle = new FractalTriangle(x1, y1, x2, y2, x3, y3);
-	
 	triangles.clear();
-	splitTriangles(*triangle);
-
+	triangles.push_back(FractalTriangle(x1, y1, x2, y2, x3, y3));
+	splitTriangles(triangles[0]);
 	
 }
 
@@ -176,42 +154,26 @@ void testApp::drawTriangles(FractalTriangle& t) {
 
 	// if (t.l>2 && t.l>(1-d)*depth || t.l >= depth) {
 	// if (t.l>2 && ofRandom(100)>75 || t.l >= depth) {
-	if (t.l > 2 && t.l >= 2+noize*(depth-2) || t.l >= depth) {
+	if (t.l >= depth) {
 		
 		if (t.hasIntegral) {
+		
 			ofFill();
 
 			//if(t.l == depth && ofRandom(100)>99.5) 
 			//	ofEnableBlendMode(OF_BLENDMODE_SCREEN);
 			//else 
 			//	ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-
-			if(doSave) {
-				ofSetColor(t.r, t.g, t.b, 400);
-				ofTriangle(t.x1, t.y1, t.x2, t. y2, t.x3, t.y3);
-			} else {
-				glBegin(GL_TRIANGLES);
-				glColor4f(t.r1/255.0, t.g1/255.0, t.b1/255.0, 0.1); glVertex2d(t.x1, t.y1);
-				glColor4f(t.r2/255.0, t.g2/255.0, t.b2/255.0, 0.1); glVertex2d(t.x2, t.y2);
-				glColor4f(t.r3/255.0, t.g3/255.0, t.b3/255.0, 0.1); glVertex2d(t.x3, t.y3);
-				glEnd();
-			}		
-
-			if(t.l<depth-1) { 
-			    //ofSetColor(0xff, 0xff, 0xff, 16);
-			 	//ofSetColor(t.r, t.g, t.b, 32);
-			 	//ofCircle(cx, cy, r);
-			 	ofSetColor(t.r, t.g, t.b, 16);
-			 	ofTriangle(t.x12, t.y12, t.x23, t.y23, t.x31, t.y31);
-			 }
-
+			// ofSetColor(t.r, t.g, t.b, 400);
+			// ofTriangle(t.x1, t.y1, t.x2, t. y2, t.x3, t.y3);
 			
-			if (t.l<depth-2) {
-				ofNoFill();
-				ofSetColor(0xFF, 0xFF, 0xFF, 32);
-				ofCircle(cx, cy, r*2);
-			}
+			glBegin(GL_TRIANGLES);
+			glColor4f(t.r1/255.0, t.g1/255.0, t.b1/255.0, 0.1); glVertex2d(t.x1*2, t.y1*2);
+			glColor4f(t.r2/255.0, t.g2/255.0, t.b2/255.0, 0.1); glVertex2d(t.x2*2, t.y2*2);
+			glColor4f(t.r3/255.0, t.g3/255.0, t.b3/255.0, 0.1); glVertex2d(t.x3*2, t.y3*2);
+			glEnd();
 		}
+		
 
 	} else {
 		drawTriangles(*t.t1);
@@ -230,19 +192,22 @@ void testApp::draw(){
 
 	int k = 100;
 	// image.draw(0,0, w/2.0, h/2.0);
+	if(triangles.size())
+	for (int i = 0; i<triangles.size(); i++) {
+		if(triangles[i].l == depth) {
+			ofSetColor(triangles[i].r, triangles[i].g, triangles[i].b);
+			ofTriangle(
+				triangles[i].x1, triangles[i].y1, 
+				triangles[i].x2, triangles[i].y2, 
+				triangles[i].x3, triangles[i].y3);
+		}
+	}
 
-	// for (int i = 0; i<rects.size(); i++) {
-	// 	FractalRect r = rects[i];
-	// 	ofSetColor(r.r, r.g, r.b);
-	//	ofRect(r.x, r.y, r.w-1, r.h-1);
-	// }
-
-	//drawTriangles(*triangle);
+	//if(triangles.size()) drawTriangles(triangles[0]);
 	
-	ofDisableAlphaBlending();
-
-	colorImage.draw( 0, 0, W, H);
-	depthImage.draw( W, 0, W, H);
+	// ofDisableAlphaBlending();
+	// colorImage.draw( 0, 0, W, H);
+	// depthImage.draw( W, 0, W, H);
 
 
 }

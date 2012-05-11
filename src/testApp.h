@@ -22,19 +22,16 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		void splitRects(FractalRect r);
 		void splitTriangles(FractalTriangle& t);
 		void drawTriangles(FractalTriangle& t);
 
 		void calcIntegral(ofImage bitmap);
 		
-		vector<FractalRect>     rects;
 		vector<FractalTriangle> triangles;
 
 		unsigned long* integralColor;
 		unsigned long* integralDepth;
 
-		FractalTriangle* triangle;
 		unsigned int depth;
 
 		bool doSave;

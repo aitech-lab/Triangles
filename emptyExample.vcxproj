@@ -116,14 +116,12 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\FractalRect.cpp" />
     <ClCompile Include="src\FractalTriangle.cpp" />
     <ClCompile Include="src\Kinect.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\testApp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\FractalRect.h" />
     <ClInclude Include="src\FractalTriangle.h" />
     <ClInclude Include="src\Kinect.h" />
     <ClInclude Include="src\resource.h" />
