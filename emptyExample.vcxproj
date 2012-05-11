@@ -50,7 +50,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(OF7)\libs\openFrameworks;$(OF7)\libs\openFrameworks\graphics;$(OF7)\libs\openFrameworks\app;$(OF7)\libs\openFrameworks\sound;$(OF7)\libs\openFrameworks\utils;$(OF7)\libs\openFrameworks\communication;$(OF7)\libs\openFrameworks\video;$(OF7)\libs\openFrameworks\math;$(OF7)\libs\openFrameworks\types;$(OF7)\libs\openFrameworks\events;$(OF7)\libs\glut\include;$(OF7)\libs\rtAudio\include;$(OF7)\libs\quicktime\include;$(OF7)\libs\freetype\include;$(OF7)\libs\freetype\include\freetype2;$(OF7)\libs\freeImage\include;$(OF7)\libs\fmodex\include;$(OF7)\libs\videoInput\include;$(OF7)\libs\glew\include\;$(OF7)\libs\glu\include;$(OF7)\libs\poco\include;$(OF7)\addons;$(OF7)\libs\openFrameworks\gl;$(OF7)\libs\openFrameworks\3d;$(OF7)\libs\tess2\include;$(OF7)\libs\cairo\include\cairo%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(KINECTSDK10_DIR)\inc;$(OF7)\libs\openFrameworks;$(OF7)\libs\openFrameworks\graphics;$(OF7)\libs\openFrameworks\app;$(OF7)\libs\openFrameworks\sound;$(OF7)\libs\openFrameworks\utils;$(OF7)\libs\openFrameworks\communication;$(OF7)\libs\openFrameworks\video;$(OF7)\libs\openFrameworks\math;$(OF7)\libs\openFrameworks\types;$(OF7)\libs\openFrameworks\events;$(OF7)\libs\glut\include;$(OF7)\libs\rtAudio\include;$(OF7)\libs\quicktime\include;$(OF7)\libs\freetype\include;$(OF7)\libs\freetype\include\freetype2;$(OF7)\libs\freeImage\include;$(OF7)\libs\fmodex\include;$(OF7)\libs\videoInput\include;$(OF7)\libs\glew\include\;$(OF7)\libs\glu\include;$(OF7)\libs\poco\include;$(OF7)\addons;$(OF7)\libs\openFrameworks\gl;$(OF7)\libs\openFrameworks\3d;$(OF7)\libs\tess2\include;$(OF7)\libs\cairo\include\cairo%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;POCO_STATIC;CAIRO_WIN32_STATIC_BUILD;DISABLE_SOME_FLOATING_POINT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -61,9 +61,9 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>openframeworksLibDebug.lib;cairo-static.lib;pixman-1.lib;msimg32.lib;OpenGL32.lib;GLu32.lib;kernel32.lib;setupapi.lib;Vfw32.lib;comctl32.lib;glut32.lib;rtAudioD.lib;videoInput.lib;libfreetype.lib;FreeImage.lib;qtmlClient.lib;dsound.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;glew32s.lib;fmodex_vc.lib;glu32.lib;PocoFoundationmdd.lib;PocoNetmdd.lib;PocoUtilmdd.lib;PocoXMLmdd.lib;Ws2_32.lib;tess2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>kinect10.lib;openframeworksLibDebug.lib;cairo-static.lib;pixman-1.lib;msimg32.lib;OpenGL32.lib;GLu32.lib;kernel32.lib;setupapi.lib;Vfw32.lib;comctl32.lib;glut32.lib;rtAudioD.lib;videoInput.lib;libfreetype.lib;FreeImage.lib;qtmlClient.lib;dsound.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;glew32s.lib;fmodex_vc.lib;glu32.lib;PocoFoundationmdd.lib;PocoNetmdd.lib;PocoUtilmdd.lib;PocoXMLmdd.lib;Ws2_32.lib;tess2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>$(OF7)\libs\glut\lib\vs2010;$(OF7)\libs\rtAudio\lib\vs2010;$(OF7)\libs\FreeImage\lib\vs2010;$(OF7)\libs\freetype\lib\vs2010;$(OF7)\libs\quicktime\lib\vs2010;$(OF7)\libs\fmodex\lib\vs2010;$(OF7)\libs\videoInput\lib\vs2010;$(OF7)\libs\cairo\lib\vs2010;$(OF7)\libs\cairo\lib\vs2010;$(OF7)\libs\glew\lib\vs2010;$(OF7)\libs\glu\lib\vs2010;$(OF7)\libs\Poco\lib\vs2010;$(OF7)\libs\openFrameworksCompiled\lib\vs2010;$(OF7)\libs\tess2\lib\vs2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(KINECTSDK10_DIR)\lib\x86;$(OF7)\libs\glut\lib\vs2010;$(OF7)\libs\rtAudio\lib\vs2010;$(OF7)\libs\FreeImage\lib\vs2010;$(OF7)\libs\freetype\lib\vs2010;$(OF7)\libs\quicktime\lib\vs2010;$(OF7)\libs\fmodex\lib\vs2010;$(OF7)\libs\videoInput\lib\vs2010;$(OF7)\libs\cairo\lib\vs2010;$(OF7)\libs\cairo\lib\vs2010;$(OF7)\libs\glew\lib\vs2010;$(OF7)\libs\glu\lib\vs2010;$(OF7)\libs\Poco\lib\vs2010;$(OF7)\libs\openFrameworksCompiled\lib\vs2010;$(OF7)\libs\tess2\lib\vs2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>atlthunk.lib; LIBC.lib; LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(TargetDir)$(TargetName)_debugInfo.pdb</ProgramDatabaseFile>
@@ -83,7 +83,7 @@ if not exist "$(ProjectDir)bin\data" mkdir  "$(ProjectDir)bin\data"
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>$(OF7)\libs\openFrameworks;$(OF7)\libs\openFrameworks\graphics;$(OF7)\libs\openFrameworks\app;$(OF7)\libs\openFrameworks\sound;$(OF7)\libs\openFrameworks\utils;$(OF7)\libs\openFrameworks\communication;$(OF7)\libs\openFrameworks\video;$(OF7)\libs\openFrameworks\math;$(OF7)\libs\openFrameworks\types;$(OF7)\libs\openFrameworks\events;$(OF7)\libs\glut\include;$(OF7)\libs\rtAudio\include;$(OF7)\libs\quicktime\include;$(OF7)\libs\freetype\include;$(OF7)\libs\freetype\include\freetype2;$(OF7)\libs\freeImage\include;$(OF7)\libs\fmodex\include;$(OF7)\libs\videoInput\include;$(OF7)\libs\glew\include\;$(OF7)\libs\glu\include;$(OF7)\libs\poco\include;$(OF7)\addons;$(OF7)\libs\openFrameworks\gl;$(OF7)\libs\openFrameworks\3d;$(OF7)\libs\tess2\include;$(OF7)\libs\cairo\include\cairo%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(KINECTSDK10_DIR)\inc;$(OF7)\libs\openFrameworks;$(OF7)\libs\openFrameworks\graphics;$(OF7)\libs\openFrameworks\app;$(OF7)\libs\openFrameworks\sound;$(OF7)\libs\openFrameworks\utils;$(OF7)\libs\openFrameworks\communication;$(OF7)\libs\openFrameworks\video;$(OF7)\libs\openFrameworks\math;$(OF7)\libs\openFrameworks\types;$(OF7)\libs\openFrameworks\events;$(OF7)\libs\glut\include;$(OF7)\libs\rtAudio\include;$(OF7)\libs\quicktime\include;$(OF7)\libs\freetype\include;$(OF7)\libs\freetype\include\freetype2;$(OF7)\libs\freeImage\include;$(OF7)\libs\fmodex\include;$(OF7)\libs\videoInput\include;$(OF7)\libs\glew\include\;$(OF7)\libs\glu\include;$(OF7)\libs\poco\include;$(OF7)\addons;$(OF7)\libs\openFrameworks\gl;$(OF7)\libs\openFrameworks\3d;$(OF7)\libs\tess2\include;$(OF7)\libs\cairo\include\cairo%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;POCO_STATIC;CAIRO_WIN32_STATIC_BUILD;DISABLE_SOME_FLOATING_POINT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PrecompiledHeader>
@@ -93,8 +93,8 @@ if not exist "$(ProjectDir)bin\data" mkdir  "$(ProjectDir)bin\data"
       </DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>openframeworksLib.lib;cairo-static.lib;pixman-1.lib;msimg32.lib;OpenGL32.lib;GLu32.lib;kernel32.lib;setupapi.lib;glut32.lib;rtAudio.lib;videoInput.lib;libfreetype.lib;FreeImage.lib;qtmlClient.lib;dsound.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;glew32s.lib;fmodex_vc.lib;glu32.lib;PocoFoundationmd.lib;PocoNetmd.lib;PocoUtilmd.lib;PocoXMLmd.lib;tess2.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(OF7)\libs\glut\lib\vs2010;$(OF7)\libs\rtAudio\lib\vs2010;$(OF7)\libs\FreeImage\lib\vs2010;$(OF7)\libs\freetype\lib\vs2010;$(OF7)\libs\quicktime\lib\vs2010;$(OF7)\libs\fmodex\lib\vs2010;$(OF7)\libs\videoInput\lib\vs2010;$(OF7)\libs\cairo\lib\vs2010;$(OF7)\libs\cairo\lib\vs2010;$(OF7)\libs\glew\lib\vs2010;$(OF7)\libs\glu\lib\vs2010;$(OF7)\libs\Poco\lib\vs2010;$(OF7)\libs\openFrameworksCompiled\lib\vs2010;$(OF7)\libs\tess2\lib\vs2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>kinect10.lib;openframeworksLib.lib;cairo-static.lib;pixman-1.lib;msimg32.lib;OpenGL32.lib;GLu32.lib;kernel32.lib;setupapi.lib;glut32.lib;rtAudio.lib;videoInput.lib;libfreetype.lib;FreeImage.lib;qtmlClient.lib;dsound.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;glew32s.lib;fmodex_vc.lib;glu32.lib;PocoFoundationmd.lib;PocoNetmd.lib;PocoUtilmd.lib;PocoXMLmd.lib;tess2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(KINECTSDK10_DIR)\lib\x86;$(OF7)\libs\glut\lib\vs2010;$(OF7)\libs\rtAudio\lib\vs2010;$(OF7)\libs\FreeImage\lib\vs2010;$(OF7)\libs\freetype\lib\vs2010;$(OF7)\libs\quicktime\lib\vs2010;$(OF7)\libs\fmodex\lib\vs2010;$(OF7)\libs\videoInput\lib\vs2010;$(OF7)\libs\cairo\lib\vs2010;$(OF7)\libs\cairo\lib\vs2010;$(OF7)\libs\glew\lib\vs2010;$(OF7)\libs\glu\lib\vs2010;$(OF7)\libs\Poco\lib\vs2010;$(OF7)\libs\openFrameworksCompiled\lib\vs2010;$(OF7)\libs\tess2\lib\vs2010;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>atlthunk.lib; LIBC.lib; LIBCMT;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -118,12 +118,15 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
   <ItemGroup>
     <ClCompile Include="src\FractalRect.cpp" />
     <ClCompile Include="src\FractalTriangle.cpp" />
+    <ClCompile Include="src\Kinect.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\testApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FractalRect.h" />
     <ClInclude Include="src\FractalTriangle.h" />
+    <ClInclude Include="src\Kinect.h" />
+    <ClInclude Include="src\resource.h" />
     <ClInclude Include="src\testApp.h" />
   </ItemGroup>
   <ItemGroup>

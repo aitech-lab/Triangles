@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "FractalRect.h"
 #include "FractalTriangle.h"
+#include "Kinect.h"
 
 class testApp : public ofBaseApp{
 
@@ -27,18 +28,23 @@ class testApp : public ofBaseApp{
 
 		void calcIntegral(ofImage bitmap);
 		
-		ofImage image;
 		vector<FractalRect>     rects;
 		vector<FractalTriangle> triangles;
 
-		unsigned long* integral;
+		unsigned long* integralColor;
+		unsigned long* integralDepth;
+
 		FractalTriangle* triangle;
 		unsigned int depth;
 
 		bool doSave;
 		float timer;
+		Kinect kinect;
+		ofImage depthImage;
+		ofImage colorImage;
 
 
 private:
 		bool getIntegralFromTriangle(FractalTriangle& t);
+		void calcIntegral();
 };
