@@ -1,3 +1,9 @@
+Installation - trinagular Conway's game of life
+===============================================
+
+<img src="https://raw.githubusercontent.com/ailove-lab/Ailove-Triangles/master/Arduino/triangle.jpg"/>
+
+
 triangular-fractal
 ==================
 
